@@ -9,6 +9,14 @@ struct spinlock;
 struct stat;
 struct superblock;
 
+//int kern_mprotect(int);
+void do_mprotect(void, int);
+
+//int kern_munprotect(int);
+void do_munprotect(void, int);
+
+
+
 // bio.c
 void            binit(void);
 struct buf*     bread(uint, uint);
