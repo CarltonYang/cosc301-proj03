@@ -22,7 +22,7 @@ int ppid;
 int
 main(int argc, char *argv[])
 {
- /*
+ 
   ppid = getpid();
 
   char *brk = sbrk(0);
@@ -73,6 +73,6 @@ main(int argc, char *argv[])
   }
 
    printf(1, "TEST PASSED\n");
-*/
+
    exit();
 }

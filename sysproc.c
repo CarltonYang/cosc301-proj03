@@ -92,34 +92,21 @@ sys_uptime(void)
 
 
 int
-sys_mprotect(void)
-{
-	void *addr;
+sys_mprotect(void){
+	int addr; //int to represent addr instead of void*
 	int len;
-
-	//if addr is bigger than sz or its not evenly divible by PGSIZE, return -1
- 	if(argint(0, addr) >= proc->sz || argint(0,addr)%PGSIZE!=0 )
-     	{return -1;}
-
-	//if len <= 0 or len is too big, return -1
-	if(argint(1,&len) <=0 || argint(0,addr)+(argint(1,&len) >= proc->sz)
-	{return -1;}
-
-	return do_mprotect(addr, len);
+	if (argint(0, &addr) < 0 || argint(1, &len) < 0) { //test if argint is successful
+		return -1;
+	}
+	return kern_mprotect(addr, len);
 }
 
 int sys_munprotect(void) {
-
-        void *addr;
+        int addr;  //int to represent addr instead of void*
 	int len;
-
-	//if addr is bigger than sz or its not evenly divible by PGSIZE, return -1
- 	if(argint(0, addr) >= proc->sz || argint(0,addr)%PGSIZE!=0 )
-     	{return -1;}
-
-	//if len <= 0 or len is too big, return -1
-	if(argint(1,&len) <=0 || argint(0,addr)+(argint(1,&len) >= proc->sz)
-	{return -1;}
-
-	return do_munprotect(addr, len);
+	if (argint(0, &addr) < 0 || argint(1, &len) < 0) { //test if argint is successful
+		return -1;
+	}
+	return kern_munprotect(addr, len);
 }
+

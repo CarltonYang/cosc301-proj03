@@ -9,11 +9,11 @@ struct spinlock;
 struct stat;
 struct superblock;
 
-//int kern_mprotect(int);
-void do_mprotect(void, int);
+int kern_mprotect(int addr, int len);
+int do_mprotect(int addr, int len);
 
-//int kern_munprotect(int);
-void do_munprotect(void, int);
+int kern_munprotect(int addr, int len);
+int do_munprotect(int addr, int len);
 
 
 

@@ -465,5 +465,37 @@ procdump(void)
   }
 }
 
+int 
+kern_mprotect (int addr, int len)
+{
+  
+  argint(0, &addr);
 
+  argint(1, &len);
+  //if addr is bigger than sz or its not evenly divible by PGSIZE, return -1
+  if(addr > proc->sz || addr%PGSIZE !=0 ||addr <=0)
+  {return -1;}
+
+  //if len <= 0 or len is too big, return -1
+  if(len <= 0 || addr+len*PGSIZE > proc->sz)
+  {return -1;}
+  return do_mprotect (addr, len); 
+}
+
+int 
+kern_munprotect (int addr, int len)
+{
+  
+  argint(0, &addr);
+  
+  argint(1, &len);
+  //if addr is bigger than sz or its not evenly divible by PGSIZE, return -1
+  if(addr > proc->sz || addr%PGSIZE !=0 || addr <=0)
+  {return -1;}
+
+  //if len <= 0 or len is too big, return -1
+  if(len <= 0 || addr+len*PGSIZE > proc->sz)
+  {return -1;}
+  return do_munprotect (addr, len); 
+}
 

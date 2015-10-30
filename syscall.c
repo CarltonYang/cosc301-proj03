@@ -22,7 +22,7 @@ fetchint(uint addr, int *ip)
 
   if (addr >0 && addr < PGSIZE) {
     //cprintf("proc %s, pid %d is accessing addr in first page \n", p->name, p->pid);
-    if (proc->pid != 1)
+    if (proc->pid > 1)
       return -1;
   }
   *ip = *(int*)(addr);
@@ -41,7 +41,7 @@ fetchstr(uint addr, char **pp)
     return -1;
   if (addr >0 && addr < PGSIZE) {
     //cprintf("proc %s, pid %d is accessing addr in first page \n", p->name, p->pid);
-    if (proc->pid != 1)
+    if (proc->pid > 1)
       return -1;
   }
   *pp = (char*)addr;
@@ -73,7 +73,7 @@ argptr(int n, char **pp, int size)
     return -1;
   if ((uint)i >0 && (uint)i < PGSIZE) {
     //cprintf("proc %s, pid %d is accessing addr in first page \n", proc->name, proc->pid);
-    if (proc->pid != 1)
+    if (proc->pid > 1)
       return -1;
   }
   *pp = (char*)i;
